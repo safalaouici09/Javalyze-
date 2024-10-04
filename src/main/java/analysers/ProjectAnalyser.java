@@ -1,10 +1,10 @@
-package collectors;
+package analysers;
 
 import java.io.IOException;
 import java.util.List;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
-import parsers.EclipseJDTASTParser;
+import parsers.JdtASTParser;
 
 public class ProjectAnalyser {
     private String projectPath;
@@ -14,7 +14,7 @@ public class ProjectAnalyser {
     }
 
     public void analyzeProject() {
-        EclipseJDTASTParser parser = new EclipseJDTASTParser(projectPath);
+        JdtASTParser parser = new JdtASTParser(projectPath);
         parser.configure();
 
         try {

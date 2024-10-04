@@ -1,8 +1,8 @@
 package processors;
 
-import parsers.EclipseJDTASTParser;
+import parsers.JdtASTParser;
 
-public abstract class ASTProcessor extends Processor<EclipseJDTASTParser>{
+public abstract class ASTProcessor extends Processor<JdtASTParser>{
 	/* CONSTRUCTOR */
 	public ASTProcessor(String projectPath) {
 		super(projectPath);
@@ -11,10 +11,10 @@ public abstract class ASTProcessor extends Processor<EclipseJDTASTParser>{
 	/* METHODS */
 	@Override
 	public void setParser(String projectPath) {
-		parser = new EclipseJDTASTParser(projectPath);
+		parser = new JdtASTParser(projectPath);
 	}
 	
-	public void setParser(EclipseJDTASTParser parser) {
+	public void setParser(JdtASTParser parser) {
 		this.parser = parser;
 	}
 }

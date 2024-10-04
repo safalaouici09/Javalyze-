@@ -12,7 +12,7 @@ import loggers.ConsoleLogger;
 import loggers.FileLogger;
 import loggers.LogRequest;
 import loggers.StandardLogRequestLevel;
-import parsers.EclipseJDTASTParser;
+import parsers.JdtASTParser;
 import processors.ASTProcessor;
 
 public abstract class CallGraph extends ASTProcessor {
@@ -39,14 +39,14 @@ public abstract class CallGraph extends ASTProcessor {
    }
 
    public long getNbInvocations() {
-      return this.invocations.keySet().stream().map((source) -> {
-         return (Map)this.invocations.get(source);
-      }).map((destination) -> {
-         return destination.values();
-      }).flatMap(Collection::stream).flatMapToLong((value) -> {
-         return LongStream.of((long)value);
-      }).sum();
-   }
+      return this.invocations.keySet().stream()
+          .map(source -> this.invocations.get(source))
+          .map(Map::values) // Use method reference to get values
+          .flatMap(Collection::stream)
+          .mapToLong(value -> value instanceof Integer ? ((Integer) value).longValue() : 0) // Convert Integer to long safely
+          .sum();
+  }
+  
 
    public Map<String, Map<String, Integer>> getInvocations() {
       return this.invocations;
@@ -132,7 +132,7 @@ public abstract class CallGraph extends ASTProcessor {
    }
 
    public void log() {
-      this.loggerChain.setFilePath(((EclipseJDTASTParser)this.parser).getProjectPath() + "static-callgraph.info");
+      this.loggerChain.setFilePath(((JdtASTParser)this.parser).getProjectPath() + "static-callgraph.info");
       this.loggerChain.log(new LogRequest(this.toString(), StandardLogRequestLevel.DEBUG));
    }
 } 

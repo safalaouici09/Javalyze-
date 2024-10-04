@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import collectors.ProjectAnalyser;
+import analysers.ProjectAnalyser;
 import graphs.CallGraph;
 import graphs.StaticCallGraph;
 import processors.ASTProcessor;
@@ -13,13 +13,14 @@ import processors.ASTProcessor;
 public class StatisticsCollectorMain extends DefaultMain {
     private ASTProcessor processor; // Déclare une variable d'instance pour ASTProcessor
 
-    private static final String PROJECTS_DIRECTORY = "/home/safa/Bureau/Tp1_partie2/projectsJava"; 
+    private static final String PROJECTS_DIRECTORY = "../projectsJava"; 
+
 
     @Override
     protected void menu() {
         StringBuilder builder = new StringBuilder();
         builder.append("1. Collecter les statistiques.");
-        builder.append("\n2. Afficher le graphique d'appel.");
+        builder.append("\n2. Afficher le graph d'appel.");
         builder.append("\n3. Quitter.");
         System.out.println(builder);
     }
@@ -82,7 +83,7 @@ public class StatisticsCollectorMain extends DefaultMain {
     @Override
     protected void processUserInput(String userInput) {
         CallGraph callGraph = (CallGraph) processor; 
-        // Cette méthode doit être correctement implémentée selon vos besoins
+        
         switch (userInput) {
             case "1":
                 System.out.println("Collecte des statistiques pour le projet situé à " + TEST_PROJECT_PATH);

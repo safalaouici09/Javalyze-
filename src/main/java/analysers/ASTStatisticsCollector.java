@@ -1,9 +1,9 @@
-package collectors;
+package analysers;
 import org.eclipse.jdt.core.dom.*;
 
-import visitors.ClassDeclarationsCollector;
-import visitors.FieldDeclarationCollector;
-import visitors.MethodDeclarationsCollector;
+import visitors.ClassDeclarationsVisitor;
+import visitors.FieldDeclarationVisitor;
+import visitors.MethodDeclarationsVisitor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
